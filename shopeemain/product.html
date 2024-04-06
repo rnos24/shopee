@@ -8,20 +8,7 @@
   <link rel="stylesheet" type="text/css" href="css/navbar.css">
   <link rel="stylesheet" type="text/css" href="css/productpage.css">
 
-  <script type="text/javascript">
-    function search(){
-      var value = document.getElementById("searchBar").value;
-      var products = JSON.parse(localStorage.getItem("products"))
-      var id = -1;
-      for (let i = 0; i < products.length; i++) {
-        if (value === products[i].name) {
-          id=products[i].id;
-        }
-
-      }
-      window.location.href = "product.html?id=" + id;
-    }
-  </script>
+  <script src="js/product2.js"></script>
 </head>
 
 <body>
@@ -60,41 +47,7 @@
 
   <script src="js/loginNavBar.js"></script>
   <script src="js/modal.js"></script>
-
-  <script>
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const productId = urlParams.get('id');
-
-    const products = JSON.parse(localStorage.getItem('products'));
-    const product = products.find(item => item.id == productId);
-
-    if (product) {
-      document.getElementById('linkProductName').textContent = product.name;
-      document.getElementById('productName').textContent = product.name;
-      document.getElementById('productImage').src = product.imageUrl;
-      document.getElementById('productDescription').textContent = product.longDesc;
-      document.getElementById('productPrice').textContent = `Price: $${product.price}`;
-
-      document.getElementById('addToCartBtn').addEventListener('click', () => {
-        console.log(`Added ${product.name} to cart`);
-        addToCart(product);
-      });
-    } else {
-      document.getElementById('linkProductName').textContent = 'Product Not Found';
-      document.getElementById('productName').textContent = 'Product Not Found';
-      const addToCartBtn = document.getElementById('addToCartBtn');
-      addToCartBtn.parentNode.removeChild(addToCartBtn);
-    }
-
-    function addToCart(product) {
-      let cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
-      const {imageUrl, name, price} = product;
-      cartItems.push({imageUrl, name, price});
-      sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }
-
-  </script>
+  <script src="js/product.js"> </script>
 </body>
 
 </html>
