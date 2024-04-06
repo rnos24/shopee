@@ -1,0 +1,135 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-image: url(../img/HAIII.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    color: white;
+}
+
+body{
+    background-color: wheat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.main{
+    border-radius: 50px;
+    position: relative;
+    width: 770px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.main button{
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    padding: 10px 25px;
+    border: 0px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.main form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+
+.main input{
+    background-color: white;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 10px;
+    width: 80%;
+    border: none;
+    outline: none;
+}
+
+.form1{
+    position: absolute;
+    height: 100%;
+}
+
+.sign-in{
+    width: 60%;
+    left: 150px;
+}
+
+.sign-up{
+    width: 60%;
+    left: 150px;
+}
+
+img{
+    width: 20%;
+}
+
+p{
+    color: white;
+}
+
+a{
+    color: #00ffee;
+    text-decoration: none;
+}
+.error-message{
+    display: none;
+    font-weight: 600;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+    color: red;
+}
+
+.checkbox{
+    position:relative;
+    display: flex;
+    opacity: 50%;
+    bottom: 5.2%;
+    left: 34%;
+    transform: translateY(-50%);
+    background: url(../img/eye.svg);
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    cursor: pointer;
+    margin-bottom: -20px;
+  }
+.checkbox.hide{
+    opacity: 100%;
+    background: url(../img/eye-slash.svg);
+    background-size: cover;
+}
+.accU{
+    font-size: 10px;
+}
