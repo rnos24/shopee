@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page</title>
+  <link rel="stylesheet" type="text/css" href="css/navbar.css">
+  <link rel="stylesheet" type="text/css" href="css/productpage.css">
+
+  <script type="text/javascript">
+    function search(){
+      var value = document.getElementById("searchBar").value;
+      var products = JSON.parse(localStorage.getItem("products"))
+      var id = -1;
+      for (let i = 0; i < products.length; i++) {
+        if (value === products[i].name) {
+          id=products[i].id;
+        }
+
+      }
+      window.location.href = "product.html?id=" + id;
+    }
+  </script>
+</head>
+
+<body>
+  <div class="navbar">
+    <a href="index.html"><img src="img/navbarimg/weblogo.png" class="navlogo"></a>
+    <a href="index.html">Home</a>
+    <input id="searchBar" type="text" class="search-bar" placeholder="Search... CASE SENSITIVE!">
+    <button type="button" class="btn-success" onclick="search()" name="button">Search</button>
+    <img src="img/navbarimg/cart.png" class="navcart" id="openModal">
+    <span id="usernameDisplay">Username</span>
+  </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h1 align="center">CART</h1>
+      <div id="cartItemsContainer"></div>
+      <center>
+        <button id="deleteSelected" style="  background-color: rgb(160, 36, 36); border-radius: 5px; color: white; padding: 2px; border: none; cursor: pointer;">Delete Selected</button>
+        <label><input type="checkbox" id="selectAll"> Select All</label </center>
+        <p><a href="orderformpage.html" style="  background-color: rgba(63, 52, 228, 1);">Proceed to Order Form</a></p>
+    </div>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> <span>/</span> <span id="linkProductName"></span>
+  </div>
+
+  <div id="productDetails" class="productDetails">
+    <h1 id="productName" style="color: white; text-align: center"></h1>
+    <img id="productImage" src="" alt="">
+    <p id="productDescription" class="productDescription"></p>
+    <p id="productPrice" class="productPrice"></p>
+    <button id="addToCartBtn">Add to Cart</button>
+  </div>
+
+  <script src="js/loginNavBar.js"></script>
+  <script src="js/modal.js"></script>
+
+  <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const productId = urlParams.get('id');
+
+    const products = JSON.parse(localStorage.getItem('products'));
+    const product = products.find(item => item.id == productId);
+
+    if (product) {
+      document.getElementById('linkProductName').textContent = product.name;
+      document.getElementById('productName').textContent = product.name;
+      document.getElementById('productImage').src = product.imageUrl;
+      document.getElementById('productDescription').textContent = product.longDesc;
+      document.getElementById('productPrice').textContent = `Price: $${product.price}`;
+
+      document.getElementById('addToCartBtn').addEventListener('click', () => {
+        console.log(`Added ${product.name} to cart`);
+        addToCart(product);
+      });
+    } else {
+      document.getElementById('linkProductName').textContent = 'Product Not Found';
+      document.getElementById('productName').textContent = 'Product Not Found';
+      const addToCartBtn = document.getElementById('addToCartBtn');
+      addToCartBtn.parentNode.removeChild(addToCartBtn);
+    }
+
+    function addToCart(product) {
+      let cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+      const {imageUrl, name, price} = product;
+      cartItems.push({imageUrl, name, price});
+      sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+
+  </script>
+</body>
+
+</html>

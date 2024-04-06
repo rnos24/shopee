@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/logindes.css">
+  <title>Login</title>
+</head>
+
+<body>
+  <div class="main" id="main">
+    <div class="form1 sign-in">
+      <form id="loginForm">
+        <h1>Login</h1>
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <div id="checkbox" class="checkbox" onclick="showPass();"></div>
+        <p class="error-message" id="errorMessage"></p>
+        <button type="submit">LOGIN</button>
+        <br>
+        <p class="accU">no account yet? <a href="Signup.html">Sign up here</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    sessionStorage.setItem("CSELEC03", "webprog");
+
+    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      window.location.href = "index.html";
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (sessionStorage.getItem(username) === password) {
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("isLoggedIn", true);
+        window.location.href = "index.html";
+      } else {
+        var errorMessageElement = document.querySelector('.error-message');
+        errorMessageElement.style.display = 'block';
+        errorMessageElement.textContent = 'Invalid username or password';
+      }
+    });
+
+    let showPassword = document.getElementById('checkbox')
+
+    function showPass() {
+      var password = document.getElementById('password');
+      if (password.type === 'password') {
+        password.setAttribute('type', 'text');
+        showPassword.classList.add('hide')
+      }
+      else {
+        password.setAttribute('type', 'password')
+        showPassword.classList.remove('hide')
+      }
+    }
+  </script>
+</body>
+</html>

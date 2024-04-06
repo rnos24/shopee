@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/logindes.css">
+  <title>Sign Up</title>
+</head>
+
+
+<body>
+    <div class="main" id="main">
+      <div class="form1 sign-in">  
+          <form id="signupForm">
+              <h1>Create Account</h1>
+              <input type="text" id="newUsername" name="newUsername" placeholder="Username" required>
+              <input type="password" id="newPassword" name="newPassword" placeholder="Password" required>
+              <div id="checkbox" onclick="showPass();"></div> 
+              <p class="error-message" id="errorMessage"></p>
+            <button type="submit">SIGN UP</button>
+            <br><p class="accU">have an account already? <a href="Login.html">Login here</a></p>
+          </form>
+      </div>
+    </div>
+
+  <script>
+    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      window.location.href = "index.html";
+    }
+
+    document.getElementById("signupForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      var newUsername = document.getElementById("newUsername").value;
+      var newPassword = document.getElementById("newPassword").value;
+
+      if (sessionStorage.getItem(newUsername) || newUsername === "CSELEC03") {
+        document.getElementById("errorMessage").textContent = "Username already exists or is invalid.";
+      } else {
+       
+        sessionStorage.setItem(newUsername, newPassword);
+        window.location.href = "Login.html";
+      }
+    });
+
+    let showPassword = document.getElementById('checkbox')
+
+    function showPass(){
+      let password = document.getElementById('newPassword');
+      if(password.type === 'password'){
+        password.setAttribute('type','text');
+        showPassword.classList.add('hide')    
+      }
+      else{
+        password.setAttribute('type','password')
+        showPassword.classList.remove('hide')    
+      }
+    }
+  </script>
+</body>
+
+</html>
